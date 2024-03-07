@@ -1,5 +1,5 @@
 //**Creo una constante con el url del backend, de modo que si cambia la url, solo cambie esta constante y no todos los fetch */
-const backendURL = 'http://localhost:3000'; 
+const backendURL = 'https://mynotesweb.onrender.com'; 
 //----------------------------* SECCION MY NOTES *-------------------------------------//
 
 /*Codigo para abrir la ventana de creacion de notas*/
