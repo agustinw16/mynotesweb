@@ -1,0 +1,389 @@
+/*Estilos para todo el documento*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*Estilos para el h1*/
+h1{
+    font-size: 50px;
+}
+/*Estilos para el body*/
+body {
+    width: 100%;
+    color: #555;
+    font-family: Open Sans;
+    font-size: 16px;
+    position: relative;
+    height: 100vh;
+    font-weight: 400;
+}
+
+/*****************Elementos de la cabecera********************/
+
+/*Clase para el contenedor que tendra cada seccion principal*/
+.contenedorGeneral{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 30% 70%;
+}
+/*Clase para los contenedores de las cabeceras que tendra cada seccion principal*/
+.contenedorCabecera, .contenedorCabeceraArchivo{
+    padding: 25px;
+    color: white;
+    background: url(fondo.png), linear-gradient(to left, rgb(253, 164, 92), #FFA533);
+    display: grid;
+    align-items: center;
+    grid-template-areas: "tituloCabecera botonCabecera linkCabecera";
+    justify-content: flex-start;
+}
+/*A la clase de la cabecera de la seccion archived la particularizo y solo le pongo 2 columnas*/
+.contenedorCabeceraArchivo{
+    grid-template-areas: "tituloCabecera linkCabecera";
+}
+
+/*Clase para el titulo de la cabecera*/
+.titulo{
+    margin: 5px;
+    padding: 20px;
+    grid-area: tituloCabecera;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+/*Clase para acomodar el div que contiene al boton de crear nota*/
+.divBtn{
+    margin: 5px;
+    padding: 20px;
+    grid-area: botonCabecera;
+}
+/*Estilos para el boton de crear nota*/
+#botonCrear{
+    background-color: white;
+    border: 2px solid white;
+    color: rgb(238, 169, 42);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 5px;
+}
+/*Estilos para el boton de crear nota al pasar el cursor sobre el*/
+#botonCrear:hover{
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 1px rgba(238, 169, 42);
+}
+
+/*Clase para acomodar el div que contiene al enlace*/
+.enlace{
+    margin: 5px;
+    padding: 20px;
+    grid-area: linkCabecera;
+}
+/*Clase para acomodar el div que contiene al enlace de la seccion archivado*/
+.enlaceArchivo{
+    text-align: center;
+    grid-area: linkCabecera;
+}
+/*Estilos para los enlaces (normal, al ser visitados, al pasar el cursor sobre el)*/
+a:link {
+    color:white;
+}
+a:visited{
+    color:white;
+}
+a:hover{
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+/*****************Elementos del contenedor de notas********************/
+
+/*Clase para acomodar las cajas que contienen las notas*/
+.contenedorNotas{
+    padding: 10px; /*Espacio entre los bordes del div y las cajas dentro del dip*/
+    margin: 20px; /*espacio entre el div y los bordes externos*/
+    gap: 20px;
+    overflow: auto;
+    display: inline-grid;
+    grid-auto-rows: 100px; /*Altura de las filas que se van agregando automaticamente*/
+    grid-auto-columns: 49%;
+    grid-template-areas: "a1 a2 ";
+
+}
+
+/*Clase para generar los contenedores que tendras los datos y acciones de las notas*/
+.cajas{
+    /*width: 100%;*/
+    /*height:100px;*/
+    border: 1px solid #555;
+    display: inline-grid;
+    grid-template-areas: "fondo nombre botones " "fondo fecha botones"; /*Para acomodar mejor dentro de la caja creo areas*/
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*****************Elementos dentro de cada caja********************/
+
+/*Clase para acomodar el div que estara hacia la derecha de la caja y sus elementos*/
+.derecha {
+    display:flex;
+    align-items: flex-end;
+    grid-area: botones; 
+    justify-content: flex-end;
+}
+/*Clase para acomodar el div que estara hacia la izquierda de la caja y sus elementos*/
+.izquierda{
+    display:flex;
+    align-items: center;
+    grid-area: fondo;
+}
+/*Clase para acomodar el titulo de las notas en la caja*/
+.nota_nombre {
+    padding: 5px;
+    grid-area: nombre;
+}
+/*Clase para acomodar la fecha de las notas en la caja*/
+.nota_fecha {
+    padding: 5px;
+    grid-area: fecha;
+}
+
+/*Le saco los eventos por defecto a los iconos de ion-icon (para no mostar los nombres por defecto de estos)*/
+ion-icon{
+    pointer-events: none;
+}
+
+/*Clase para darle estilos al boton archivar que contiene al icono de archivar*/
+.elemento_archivar--btn {
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+/*Estilos para la clase del boton archivar, al pasar el cursor sobre este, cambia de color*/
+.elemento_archivar--btn:hover{
+    color: orange
+}
+
+/*Clase para darle estilos al boton editar que contiene al icono de editar*/
+.elemento_editar--btn {
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+/*Estilos para la clase del boton editar, al pasar el cursor sobre este, cambia de color*/
+.elemento_editar--btn:hover{
+    color:lightseagreen
+}
+
+/*Clase para darle estilos al boton eliminar que contiene al icono de eliminar*/
+.elemento_eliminar--btn {
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+/*Estilos para la clase del boton eliminar, al pasar el cursor sobre este, cambia de color*/
+.elemento_eliminar--btn:hover{
+    color: crimson;
+}
+
+/*Clase para darle estilos al boton mostrar que contiene al icono de nota*/
+.elemento_mostrar--btn {
+    color: #FFD133;
+    background: none;
+    border: none;
+    display:flex;
+    font-size: 70px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/*Estilos para hacer un diseño responsivo cuando la pantalla sea menor a 768px*/
+@media screen and (max-width: 768px){
+
+    /*En el contenedor de notas pasara de tener 2 columnas a solamente filas*/
+    .contenedorNotas{
+        grid-auto-columns: 100%;
+        grid-template-areas: "a1" "a2";
+    }
+    /*El contenedor de la cabecera pasara de tener 3 columnas a 2 filas y 2 columnas */
+    .contenedorCabecera{
+        grid-template-areas: "tituloCabecera tituloCabecera" "botonCabecera linkCabecera";
+        justify-content: center;
+    }
+    /*El contenedor de la cabecera de la seccion de archivado pasara de tener 2 columnas a 2 filas*/
+    .contenedorCabeceraArchivo{
+        grid-template-areas: "tituloCabecera" "linkCabecera";
+        justify-content: center;
+    }
+    /*El titulo de la cabecera se centrara*/
+    .titulo{
+        text-align: center;
+    }
+    /*El boton crear nota aumentara su tamaño*/
+    #botonCrear{
+        font-size: 20px;
+    }
+    /*Los enlaces para cambiar de seccion aumentaran su tamaño*/
+    .enlace, .enlaceArchivo{
+        font-size: 20px;
+    }
+}
+
+/*******************SECCION VENTANAS MODAL**************************/
+
+/*Clase para las Ventanas modal*/
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #111111bd;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .6s;
+}
+
+/*Clase para mostrar las ventanas modal*/
+.modal--show{
+    opacity: 1;
+    pointer-events: unset;
+    transition: opacity .6s;
+}
+
+/*Clase para el contenido de las ventanas modal*/
+.modalContenido{
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 1em 1em;
+    display: inline-grid;
+    row-gap: 1em;
+    place-items: center;
+    grid-template-areas: "titulo" "formulario";
+}
+
+/*Clase para el titulo de las ventanas modal*/
+.modalTitulo{
+    grid-area: titulo;
+    font-size: 2.5rem;
+    color: orange;
+}
+
+/*Clase para el formulario de las ventanas modal (crear y editar)*/
+.modalFormulario{
+    width: 90%; /*el formulario ocupara el 90% del tamaño del div que contiene el formulario y el titulo*/
+    grid-area: formulario;
+    display: grid;
+    grid-template-areas: "tituloNota" "contenido" "botones";
+    row-gap: 2em; /*espaciado entre las filas del grid*/
+}
+
+/*Creo una clase formulario propia para acomodar mejor los elementos al mostrar una nota*/
+.modalFormularioMostrar{
+    border-top: 1px solid gray; /*Le agrego un borde en la parte superior del form con id mostrarNota para separar titulo de contenido*/
+    width: 90%; /*el formulario ocupara el 90% del tamaño del div que contiene el formulario y el titulo*/
+    grid-area: formulario;
+    display: grid;
+    grid-template-areas: "contenidoMostar" "contenidoMostrar" "botones";
+    row-gap: 1em; /*espaciado entre las filas del grid*/
+}
+
+/*Clase para el div que contiene el input y el titulo de la nota en el formulario (crear y editar)*/
+.modalTituloNota{
+    grid-area: tituloNota;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /*Se alinea el titulo y el texto del input*/
+}
+
+/*Estilos para los input de crear y editar*/
+#tituloNota, #tituloNotaEditar, #tituloNotaEditarArchivado{
+    padding: 5px; /*Espacio entre el contenedor y lo que se escriba*/
+    width: 80%; /*el input del titulo ocupara el 80% del ancho del formulario*/
+    font-family: Open Sans;
+}
+
+/*Clase para el div que contiene el textarea y el contenido de la nota en el formulario (crear y editar)*/
+.modalContenidoNota{
+    height: 150px; /*Tamaño del alto del div que contiene al textarea*/
+    grid-area: contenido;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /*Se alinea el titulo y el texto del input*/
+}
+
+/*Creo una clase propia cuando voy a mostrar el contenido de una nota para que ocupe dos areas del grid de la clase formularioMostrar*/
+.modalContenidoNotaMostrar{
+    height: 150px; /*Tamaño del alto del div que contiene al textarea*/
+    grid-area: contenidoMostrar;
+    display: flex;
+    overflow: auto; /*Agrega barras de desplazamiento cuando es necesario*/
+}
+
+/*Estilos para los textarea de crear y editar*/
+#contenidoNota, #contenidoNotaEditar, #contenidoNotaEditarArchivado{
+    padding: 5px; /*Espacio entre el contenedor y lo que se escriba*/
+    resize: none;
+    height: 100%; /*el input del textarea ocupara el 100% del alto del div que tiene el textarea*/
+    width: 80%; /*el input del textarea ocupara el 80% del ancho del formulario*/
+    font-family: Open Sans;
+}
+
+/*Clase para el div que contiene los botones de las ventanas modal */
+.modalBotones{
+    grid-area: botones;
+    font-size: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*Estilos de espaciado para los botones dentro la clase modalBotones */
+.modalBotones button{
+    margin: 5px; /*espaciado entre los botones y el exterior*/
+    padding: 5px; /*espaciado entre el cuadro del boton y el texto del boton*/
+    cursor: pointer; /*al pasar el cursor sobre el boton cambia el diseño del cursor*/
+}
+
+/*Clase para el Contenido de las Ventanas modal ELIMINAR*/
+.modalContenidoEliminar, .modalContenidoArchivar{
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90%;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 2em 1em;
+    display: grid;
+    gap: 1em;
+    place-items: center;
+    grid-auto-columns: 100%;
+    grid-template-rows: repeat(2,auto);
+}
+
+/*Clase para el titulo de las Ventanas modal archivar*/
+.modalTituloEliminar, .modalTituloArchivar{
+    font-size: 1.2rem;
+}
+
+/*Clase para los botones de las Ventanas modal ELIMINAR y ARCHIVAR*/
+.modalBtnEliminar, .modalBtnArchivar{
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+
+

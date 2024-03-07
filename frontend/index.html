@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='style.css'>
+    <title>My Notes</title>
+</head>
+<body>
+    <!------------- *****     VENTANAS PRINCIPALES     *****  ------------->
+        <!--SECCION DE MY NOTES-->
+        <section id="notasSection">
+            <div class="contenedorGeneral">  
+                <div class="contenedorCabecera">
+                    <div class="titulo">
+                        <h1>My Notes</h1>
+                    </div>
+                    <div class="divBtn">
+                        <button id="botonCrear">Create Note</button>
+                    </div>
+                    <div class="enlace">
+                        <a href="" id="archivoEnlace">Archive Notes</a>
+                    </div>
+                </div>
+                <div class="contenedorNotas" id="contenedorNotas">
+                </div>
+                
+            </div>
+        </section>
+
+        <!--SECCION DE ARCHIVED NOTES-->
+        <section id="archivoSection" hidden>
+            <div class="contenedorGeneral">
+                <div class="contenedorCabeceraArchivo">
+                    <div class="titulo">
+                        <h1>Archived Notes</h1>
+                    </div>
+                    <div class="enlaceArchivo">
+                        <a href="" id="misNotasEnlace">< Go back to unarchived notes</a>  
+                    </div>                  
+                </div>
+                <div class="contenedorNotas" id="contenedorNotasArchivadas"></div>
+            </div>
+            
+        </section>
+
+    <!------------- *****     VENTANAS EMERGENTES     *****  ------------->
+
+        <!--VENTANA CREAR NOTA-->
+        <section id="crearSection"class="modal ">
+            <div class="modalContenido">
+                <h2 class="modalTitulo">Create note</h2>
+                <form id="guardarNota" class="modalFormulario">
+
+                    <div class="modalTituloNota">
+                        <label>Title</label>
+                        <input type="text" id="tituloNota" placeholder="Title Note" required="true" maxlength="45"/> 
+                    </div>
+
+                    <div class="modalContenidoNota">
+                        <label>Content</label>
+                        <textarea id="contenidoNota" placeholder="Content Note..." required="true"></textarea>
+                    </div>
+
+                    <div class="modalBotones">
+                        <button id="botonCancelarCrear">Cancel</button>
+                        <button id="botonGuardarCrear">Save</button>   
+                    </div>               
+                </form>
+            </div>
+        </section>
+        
+        <!--VENTANA EDITAR NOTA-->
+        <section id="editarSection"class="modal ">
+            <div class="modalContenido">
+                <h2 class="modalTitulo">Edit note</h2>
+                <form id="editarNota" class="modalFormulario">
+
+                    <div class="modalTituloNota">
+                        <label>Title</label>
+                        <input type="text" id="tituloNotaEditar" placeholder="Title Note" required="true" maxlength="45"/> 
+                    </div>
+
+                    <div class="modalContenidoNota">
+                        <label>Content</label>
+                        <textarea id="contenidoNotaEditar" placeholder="Content Note..." required="true"></textarea>
+                    </div>
+
+                    <div class="modalBotones">
+                        <button id="botonCancelarEditar">Cancel</button>
+                        <button id="botonGuardarEditar">Save</button>   
+                    </div>               
+                </form>
+            </div>
+        </section>
+
+        <!--VENTANA EDITAR NOTA (EN LA SECCION DE ARCHIVADO)-->
+        <section id="editarSectionArchivado"class="modal ">
+            <div class="modalContenido">
+                <h2 class="modalTitulo">Edit note</h2>
+                <form id="editarNota" class="modalFormulario">
+
+                    <div class="modalTituloNota">
+                        <label>Title</label>
+                        <input type="text" id="tituloNotaEditarArchivado" placeholder="Title Note" required="true" maxlength="45"/> 
+                    </div>
+
+                    <div class="modalContenidoNota">
+                        <label>Content</label>
+                        <textarea id="contenidoNotaEditarArchivado" placeholder="Content Note..." required="true"></textarea>
+                    </div>
+
+                    <div class="modalBotones">
+                        <button id="botonCancelarEditarArchivado">Cancel</button>
+                        <button id="botonGuardarEditarArchivado">Save</button>   
+                    </div>               
+                </form>
+            </div>
+        </section>
+
+        <!--VENTANA ELIMINAR NOTA -->
+        <section id="eliminarSection"class="modal ">
+            <div class="modalContenidoEliminar">
+                <h2 class="modalTituloEliminar">Are you sure you want to delete this note?</h2>
+                <div>
+                    <button id="botonYesEliminar" class="modalBtnEliminar">Yes</button>
+                    <button id="botonNoEliminar" class="modalBtnEliminar">No</button>
+                </div>
+            </div>
+        </section>
+
+        <!--VENTANA ELIMINAR NOTA (EN LA SECCION DE ARCHIVADO)-->
+        <section id="eliminarSectionArchivado"class="modal ">
+            <div class="modalContenidoEliminar">
+                <h2 class="modalTituloEliminar">Are you sure you want to delete this note?</h2>
+                <div>
+                    <button id="botonYesEliminarArchivado" class="modalBtnEliminar">Yes</button>
+                    <button id="botonNoEliminarArchivado" class="modalBtnEliminar">No</button>
+                </div>
+            </div>
+        </section>
+
+        <!--VENTANA ARCHIVAR NOTA-->        
+        <section id="archivarSection"class="modal ">
+            <div class="modalContenidoArchivar">
+                <h2 class="modalTituloArchivar">Are you sure you want to archive this note?</h2>
+                <div>
+                    <button id="botonYesArchivar" class="modalBtnArchivar">Yes</button>
+                    <button id="botonNoArchivar" class="modalBtnArchivar">No</button>
+                </div>
+            </div>
+        </section>
+
+        <!--VENTANA DESARCHIVAR NOTA-->
+        <section id="desarchivarSection"class="modal ">
+            <div class="modalContenidoArchivar">
+                <h2 class="modalTituloArchivar">Are you sure you want to unarchive this note?</h2>
+                <div>
+                    <button id="botonYesDesarchivar" class="modalBtnArchivar">Yes</button>
+                    <button id="botonNoDesarchivar" class="modalBtnArchivar">No</button>
+                </div>
+            </div>
+        </section>
+
+        <!--VENTANA MOSTRAR NOTA-->
+        <section id="mostrarSection"class="modal ">
+            <div class="modalContenido">
+                <h3 id="tituloEnMostrar" class="modalTitulo"></h3>
+                <form id="mostrarNota" class="modalFormularioMostrar">
+                    <div id="contenidoEnMostrar"class="modalContenidoNotaMostrar"></div> 
+                    
+                    <div class="modalBotones">
+                        <button id="botonCerrarMostrar">Cerrar</button>
+                    </div>      
+                </form>
+            </div>
+        </section>
+
+        <!--VENTANA MOSTRAR NOTA ARCHIVADA-->
+        <section id="mostrarSectionArchivado" class="modal ">
+            <div class="modalContenido">
+                <h3 id="tituloEnMostrarArchivado" class="modalTitulo"></h3>
+                <form id="mostrarNota" class="modalFormularioMostrar">
+                    <div id="contenidoEnMostrarArchivado"class="modalContenidoNotaMostrar"></div> 
+                    
+                    <div class="modalBotones">
+                        <button id="botonCerrarMostrarArchivado">Cerrar</button>
+                    </div>      
+                </form>
+            </div>
+        </section>
+
+    <script src="./script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+</body>
+</html>
