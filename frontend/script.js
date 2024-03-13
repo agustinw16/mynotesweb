@@ -268,6 +268,8 @@ const archivarNota = (id) => {
     const closeModalArchivar = document.getElementById('botonNoArchivar');
     const botonYesArchivar = document.getElementById('botonYesArchivar');
 
+    //#region comment
+
     /*
     Funcionamiento: De cada nota que se muestra, se obtiene su id (el cual cambia cada vez que se la archiva) y se lo guarda en la funcion 
     correspondiente a c/u de los botones eliminar,editar y archivar entonces cuando quiero hacer alguna de esas acciones obtengo ese id 
@@ -276,9 +278,11 @@ const archivarNota = (id) => {
     Problema: al obtener el id de una nota y luego usar ese id dentro de la funcion del botonYesArchivar.addEventListener 
     ese id no se actualizaba cuando llamaba nuevamente a la funcion archivar debido a una particularidad de la funcion addEventListener
     
-    Solucion: la solucion fue, una obtenido el id y el botonYesArchivar, asignale al boton un atributo con la funcion dataset
+    Solucion: la solucion fue, una vez obtenido el id y el botonYesArchivar, asignale al boton un atributo con la funcion dataset
     ese atributo seria el id obtenido y de esta manera se lo puede usar dentro del addEventListener y se actualiza correctamente
     */
+    //#endregion
+    
     botonYesArchivar.dataset.id=id; 
 
     //como ya se presiono el icono de archivar, la ventana se abre automaticamente
@@ -295,6 +299,8 @@ const archivarNota = (id) => {
         closeModalArchivar.dataset.eventListenerAdded = true;
     }
 
+    
+    //#region comment
     /*
     Problema: cada vez que llamaba a la funcion archivarNota y se ejecutaba el codigo botonYesArchivar.addEventListener('click'
     al botonYesArchivar se le iba agregando un nuevo adddEventListener('click') entonces cuando llamaba a la funcionar archivarNota 
@@ -308,6 +314,7 @@ const archivarNota = (id) => {
     NOTA: el evento agregado con addEventListener se agrega al boton y queda guardado en este, por lo tanto solo hay que agregarle un evento
     a cada elemento
     */
+    //#endregion
     
     // Verificar si ya se agregó el evento 'click' al botón
     if (!botonYesArchivar.dataset.eventListenerAdded) {
