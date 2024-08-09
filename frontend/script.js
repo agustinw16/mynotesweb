@@ -51,7 +51,7 @@ const crearNotasHTML = (nota) =>{  // Recibo una nota
     let notaHTML = `
     <div class="cajas">
         <div class="izquierda">
-            <button class="elemento_mostrar--btn"  title="Open" onclick="mostrarNota('${nota.title}','${nota.content}')"> 
+            <button class="elemento_mostrar--btn"  title="Open" data-title='${nota.title}' data-content='${nota.content}' onclick="mostrarNota(this)"> 
                 <ion-icon name="document" ></ion-icon>
             </button>
         </div>
@@ -66,7 +66,7 @@ const crearNotasHTML = (nota) =>{  // Recibo una nota
                 </button>
             </div>
             <div>
-                <button class="elemento_editar--btn" id="botonEditar" title="Edit" onclick="editarNota('${nota.idNote}','${nota.title}','${nota.content}')"> 
+                <button class="elemento_editar--btn" id="botonEditar" title="Edit" data-title='${nota.title}' data-content='${nota.content}' onclick="editarNota('${nota.idNote}',this)"> 
                     <ion-icon name="create"></ion-icon> 
                 </button>
             </div>
@@ -80,6 +80,14 @@ const crearNotasHTML = (nota) =>{  // Recibo una nota
     return notaHTML;
     /* Por ejemplo si paso la nota con id=10, al crear el codigo html, asi quedara el evento onclick='eliminarNota(10)' entonces
     cuando quiera eliminar ese objeto lo hare atraves de ese id*/
+
+    /* 
+    Problema: si yo paso los datos por variable ejemplo mostrarNota(${nota.title}, ${nota.content}) los caracteres especiales como saltos de linea
+    generan un error y no permite ejecutar las funciones
+
+    Solucion: si enves de pasar la info de las notas como variables seteo esa info como datos del elemento, en este caso de los button como por ejemplo
+    data-title=${nota.title} y los envio a la funcion "mostrarNota" atraves de "this" el contenido no generara ningun error y se podran usar caracteres especiales
+    */
 }
 
 //*Cargar nota al cargar la pagina
@@ -122,7 +130,7 @@ if (!formElement.dataset.eventListenerAdded){
 }
 
 //*Funcion para mostrar una nota
-const mostrarNota = (titulo,contenido) =>{
+const mostrarNota = (dateNote) =>{
     const modalMostrar = document.getElementById('mostrarSection');
     const closeModalMostrar = document.getElementById('botonCerrarMostrar');
 
@@ -139,12 +147,14 @@ const mostrarNota = (titulo,contenido) =>{
         closeModalMostrar.dataset.eventListenerAdded = true;
     }
 
-    document.getElementById("tituloEnMostrar").innerHTML = titulo;
-    document.getElementById("contenidoEnMostrar").innerHTML = contenido; // Mando la cadena con todas las notas al div con id="contenedorNotas"
+    //Recibo a traves de date-* del elemento los datos del titulo y contenido
+    document.getElementById("tituloEnMostrar").innerHTML = dateNote.dataset.title; //Inserto los datos del titulo que recibi del elemento
+    document.getElementById("contenidoEnMostrar").innerHTML = `<pre>${dateNote.dataset.content} </pre>`; /* Mando la cadena con todas las notas al div con id="contenidoEnMostrar"
+    Ademas enciero el contenido en un <pre> para respetar saltos de lineas y caracteres especiales*/
 }
 
 //*Funcion para editar una nota
-const editarNota = (id,titulo,contenido) =>{
+const editarNota = (id,dateNote) =>{
     /*Codigo para abrir la ventana de edicion de notas*/
 
     const modalEditar = document.getElementById('editarSection');
@@ -168,8 +178,8 @@ const editarNota = (id,titulo,contenido) =>{
     let noteContent=document.getElementById("contenidoNotaEditar"); 
     
     //Le asigno los valores que tenia para mostarlos en el input y textarea
-    noteTitle.value=titulo
-    noteContent.value=contenido;
+    noteTitle.value= dateNote.dataset.title; //Inserto los datos del titulo que recibi del elemento
+    noteContent.value= dateNote.dataset.content; //Inserto los datos del contenido que recibi del elemento
 
     const botonGuardarEditar = document.getElementById('botonGuardarEditar');
     botonGuardarEditar.dataset.id=id; 
@@ -361,7 +371,7 @@ const crearNotasHTMLArchivadas = (nota) =>{  // Recibo una nota
     let notaHTML = `
     <div class="cajas">
         <div class="izquierda">
-            <button class="elemento_mostrar--btn"  title="Open" onclick="mostrarNotaArchivada('${nota.title}','${nota.content}')"> 
+            <button class="elemento_mostrar--btn"  title="Open" data-title='${nota.title}' data-content='${nota.content}' onclick="mostrarNotaArchivada(this)"> 
                 <ion-icon name="document"></ion-icon>
             </button>
         </div>
@@ -376,7 +386,7 @@ const crearNotasHTMLArchivadas = (nota) =>{  // Recibo una nota
                 </button>
             </div>
             <div>
-                <button class="elemento_editar--btn" id="botonEditarD" title="Edit" onclick="editarNotaArchivada('${nota.idArchive}','${nota.title}','${nota.content}')"> 
+                <button class="elemento_editar--btn" id="botonEditarD" title="Edit" data-title='${nota.title}' data-content='${nota.content}' onclick="editarNotaArchivada('${nota.idArchive}',this)"> 
                     <ion-icon name="create"></ion-icon> 
                 </button>
             </div>
@@ -398,7 +408,7 @@ fetch(`${backendURL}/archive`).then(response => response.json()).then(data => {
 });
 
 //*Funcion para mostrar una nota archivada
-const mostrarNotaArchivada = (titulo,contenido) =>{
+const mostrarNotaArchivada = (dateNote) =>{
     const modalMostrar = document.getElementById('mostrarSectionArchivado');
     const closeModalMostrar = document.getElementById('botonCerrarMostrarArchivado');
 
@@ -415,12 +425,13 @@ const mostrarNotaArchivada = (titulo,contenido) =>{
         closeModalMostrar.dataset.eventListenerAdded = true;
     }
 
-    document.getElementById("tituloEnMostrarArchivado").innerHTML = titulo;
-    document.getElementById("contenidoEnMostrarArchivado").innerHTML = contenido; // Mando la cadena con todas las notas al div con id="contenedorNotas"
+    document.getElementById("tituloEnMostrarArchivado").innerHTML = dateNote.dataset.title;
+    document.getElementById("contenidoEnMostrarArchivado").innerHTML =  `<pre>${dateNote.dataset.content} </pre>`; /* Mando la cadena con todas las notas al div con id="contenidoEnMostrarArchivado"
+    Ademas enciero el contenido en un <pre> para respetar saltos de lineas y caracteres especiales*/
 }
 
 //*Funcion para editar una nota archivada
-const editarNotaArchivada = (id,titulo,contenido) =>{
+const editarNotaArchivada = (id,dateNote) =>{
     /*Codigo para abrir la ventana de edicion de notas*/
 
     const modalEditar = document.getElementById('editarSectionArchivado');
@@ -444,8 +455,8 @@ const editarNotaArchivada = (id,titulo,contenido) =>{
     let noteContent=document.getElementById("contenidoNotaEditarArchivado"); 
     
     //Le asigno los valores que tenia para mostarlos en el input y textarea
-    noteTitle.value=titulo
-    noteContent.value=contenido;
+    noteTitle.value= dateNote.dataset.title;
+    noteContent.value= dateNote.dataset.content;
 
     const botonGuardarEditar = document.getElementById('botonGuardarEditarArchivado');
     botonGuardarEditar.dataset.id=id;
